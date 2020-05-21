@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc ../../lib/Darwin/libRef_MathTypes.a  CMakeFiles/Ref_MathTypes.dir/MathOpSerializableAc.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib ../../lib/Darwin/libRef_MathTypes.a

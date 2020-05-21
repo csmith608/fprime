@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc ../../../lib/Darwin/libDrv_SocketIpDriver.a  CMakeFiles/Drv_SocketIpDriver.dir/SocketIpDriverComponentImpl.cpp.o CMakeFiles/Drv_SocketIpDriver.dir/SocketIpDriverComponentAc.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib ../../../lib/Darwin/libDrv_SocketIpDriver.a

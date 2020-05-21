@@ -1,0 +1,145 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/anniesmith/fprime/Ref
+-- F prime core directory set to: /Users/anniesmith/fprime/cmake/..
+-- Target build platform: Darwin
+-- Including /Users/anniesmith/fprime/cmake/platform/Darwin.cmake
+-- Requiring thread library
+-- [VALIDATION] Running: python3;/Users/anniesmith/fprime/cmake/support/validation/pipsetup.py
+-- F prime BUILD_ROOT currently set to: /Users/anniesmith/fprime/cmake/..
+-- Using autocoder constants file: /Users/anniesmith/fprime/cmake/../Fw/Cfg/AcConstants.ini
+-- Installation directory: /usr/local
+-- Adding library: Fw_Buffer
+-- 	Found port: BufferGet in /Users/anniesmith/fprime/Fw/Buffer/BufferGetPortAi.xml
+-- 	Found port: BufferSend in /Users/anniesmith/fprime/Fw/Buffer/BufferSendPortAi.xml
+-- 	Found serializable: Buffer in /Users/anniesmith/fprime/Fw/Buffer/BufferSerializableAi.xml
+-- Adding library: Fw_Com
+-- 	Found port: Com in /Users/anniesmith/fprime/Fw/Com/ComPortAi.xml
+-- Adding library: Fw_Cmd
+-- 	Found port: Cmd in /Users/anniesmith/fprime/Fw/Cmd/CmdPortAi.xml
+-- 	Found port: CmdReg in /Users/anniesmith/fprime/Fw/Cmd/CmdRegPortAi.xml
+-- 	Found port: CmdResponse in /Users/anniesmith/fprime/Fw/Cmd/CmdResponsePortAi.xml
+-- Adding library: Fw_Log
+-- 	Found port: Log in /Users/anniesmith/fprime/Fw/Log/LogPortAi.xml
+-- 	Found port: LogText in /Users/anniesmith/fprime/Fw/Log/LogTextPortAi.xml
+-- Adding library: Fw_Logger
+-- Adding library: Fw_Time
+-- 	Found port: Time in /Users/anniesmith/fprime/Fw/Time/TimePortAi.xml
+-- Adding library: Fw_Tlm
+-- 	Found port: Tlm in /Users/anniesmith/fprime/Fw/Tlm/TlmPortAi.xml
+-- Adding library: Fw_Prm
+-- 	Found port: PrmGet in /Users/anniesmith/fprime/Fw/Prm/PrmGetPortAi.xml
+-- 	Found port: PrmSet in /Users/anniesmith/fprime/Fw/Prm/PrmSetPortAi.xml
+-- Adding library: Fw_Cfg
+-- Adding library: Fw_ComFile
+-- Adding library: Fw_Comp
+-- Adding library: Fw_Obj
+-- Adding library: Fw_Port
+-- Adding library: Fw_Types
+-- Adding library: Fw_FilePacket
+-- Adding library: Fw_SerializableFile
+-- Adding library: Svc_Cycle
+-- 	Found port: Cycle in /Users/anniesmith/fprime/Svc/Cycle/CyclePortAi.xml
+-- Adding library: Svc_Fatal
+-- 	Found port: FatalEvent in /Users/anniesmith/fprime/Svc/Fatal/FatalEventPortAi.xml
+-- Adding library: Svc_Ping
+-- 	Found port: Ping in /Users/anniesmith/fprime/Svc/Ping/PingPortAi.xml
+-- Adding library: Svc_PolyIf
+-- 	Found port: Poly in /Users/anniesmith/fprime/Svc/PolyIf/PolyPortAi.xml
+-- Adding library: Svc_Sched
+-- 	Found port: Sched in /Users/anniesmith/fprime/Svc/Sched/SchedPortAi.xml
+-- Adding library: Svc_Seq
+-- 	Found port: CmdSeqIn in /Users/anniesmith/fprime/Svc/Seq/CmdSeqInPortAi.xml
+-- Adding library: Svc_WatchDog
+-- 	Found port: WatchDog in /Users/anniesmith/fprime/Svc/WatchDog/WatchDogPortAi.xml
+-- Adding library: Svc_ActiveLogger
+-- 	Found component: ActiveLogger in /Users/anniesmith/fprime/Svc/ActiveLogger/ActiveLoggerComponentAi.xml
+-- Adding library: Svc_ActiveRateGroup
+-- 	Found component: ActiveRateGroup in /Users/anniesmith/fprime/Svc/ActiveRateGroup/ActiveRateGroupComponentAi.xml
+-- Adding library: Svc_AssertFatalAdapter
+-- 	Found component: AssertFatalAdapter in /Users/anniesmith/fprime/Svc/AssertFatalAdapter/AssertFatalAdapterComponentAi.xml
+-- Adding library: Svc_BufferManager
+-- 	Found component: BufferManager in /Users/anniesmith/fprime/Svc/BufferManager/BufferManagerComponentAi.xml
+-- Adding library: Svc_ComLogger
+-- 	Found component: ComLogger in /Users/anniesmith/fprime/Svc/ComLogger/ComLoggerComponentAi.xml
+-- Adding library: Svc_CmdDispatcher
+-- 	Found component: CommandDispatcher in /Users/anniesmith/fprime/Svc/CmdDispatcher/CommandDispatcherComponentAi.xml
+-- Adding library: Svc_CmdSequencer
+-- 	Found component: CmdSequencer in /Users/anniesmith/fprime/Svc/CmdSequencer/CmdSequencerComponentAi.xml
+-- Adding library: Svc_FatalHandler
+-- 	Found component: FatalHandler in /Users/anniesmith/fprime/Svc/FatalHandler/FatalHandlerComponentAi.xml
+-- Adding library: Svc_FileDownlink
+-- 	Found component: FileDownlink in /Users/anniesmith/fprime/Svc/FileDownlink/FileDownlinkComponentAi.xml
+-- Adding library: Svc_FileManager
+-- 	Found component: FileManager in /Users/anniesmith/fprime/Svc/FileManager/FileManagerComponentAi.xml
+-- Adding library: Svc_FileUplink
+-- 	Found component: FileUplink in /Users/anniesmith/fprime/Svc/FileUplink/FileUplinkComponentAi.xml
+-- Adding library: Svc_GroundInterface
+-- 	Found component: GroundInterface in /Users/anniesmith/fprime/Svc/GroundInterface/GroundInterfaceComponentAi.xml
+-- Adding library: Svc_Health
+-- 	Found component: Health in /Users/anniesmith/fprime/Svc/Health/HealthComponentAi.xml
+-- Adding library: Svc_LinuxTime
+-- Adding library: Svc_LinuxTimer
+-- 	Found component: LinuxTimer in /Users/anniesmith/fprime/Svc/LinuxTimer/LinuxTimerComponentAi.xml
+-- Adding library: Svc_PassiveConsoleTextLogger
+-- 	Found component: PassiveTextLogger in /Users/anniesmith/fprime/Svc/PassiveConsoleTextLogger/PassiveTextLoggerComponentAi.xml
+-- Adding library: Svc_PolyDb
+-- 	Found component: PolyDb in /Users/anniesmith/fprime/Svc/PolyDb/PolyDbComponentAi.xml
+-- Adding library: Svc_PrmDb
+-- 	Found component: PrmDb in /Users/anniesmith/fprime/Svc/PrmDb/PrmDbComponentAi.xml
+-- Adding library: Svc_RateGroupDriver
+-- 	Found component: RateGroupDriver in /Users/anniesmith/fprime/Svc/RateGroupDriver/RateGroupDriverComponentAi.xml
+-- Adding library: Svc_Time
+-- 	Found component: Time in /Users/anniesmith/fprime/Svc/Time/TimeComponentAi.xml
+-- Adding library: Svc_TlmChan
+-- 	Found component: TlmChan in /Users/anniesmith/fprime/Svc/TlmChan/TlmChanComponentAi.xml
+-- Adding library: Os
+-- Adding library: Drv_DataTypes
+-- 	Found port: DataBuffer in /Users/anniesmith/fprime/Drv/DataTypes/DataBufferPortAi.xml
+-- Adding library: Drv_GpioDriverPorts
+-- 	Found port: GpioWrite in /Users/anniesmith/fprime/Drv/GpioDriverPorts/GpioWritePortAi.xml
+-- 	Found port: GpioRead in /Users/anniesmith/fprime/Drv/GpioDriverPorts/GpioReadPortAi.xml
+-- Adding library: Drv_SerialDriverPorts
+-- 	Found port: SerialRead in /Users/anniesmith/fprime/Drv/SerialDriverPorts/SerialReadPortAi.xml
+-- 	Found port: SerialWrite in /Users/anniesmith/fprime/Drv/SerialDriverPorts/SerialWritePortAi.xml
+-- Adding library: Drv_SpiDriverPorts
+-- 	Found port: SpiReadWrite in /Users/anniesmith/fprime/Drv/SpiDriverPorts/SpiReadWritePortAi.xml
+-- Adding library: Drv_I2cDriverPorts
+-- 	Found port: I2c in /Users/anniesmith/fprime/Drv/I2cDriverPorts/I2cPortAi.xml
+-- Adding library: Drv_BlockDriver
+-- 	Found component: BlockDriver in /Users/anniesmith/fprime/Drv/BlockDriver/BlockDriverComponentAi.xml
+-- Adding library: Drv_LinuxGpioDriver
+-- 	Found component: LinuxGpioDriver in /Users/anniesmith/fprime/Drv/LinuxGpioDriver/LinuxGpioDriverComponentAi.xml
+-- Adding library: Drv_LinuxSerialDriver
+-- 	Found component: LinuxSerialDriver in /Users/anniesmith/fprime/Drv/LinuxSerialDriver/LinuxSerialDriverComponentAi.xml
+-- Adding library: Drv_LinuxSpiDriver
+-- 	Found component: LinuxSpiDriver in /Users/anniesmith/fprime/Drv/LinuxSpiDriver/LinuxSpiDriverComponentAi.xml
+-- Adding library: Drv_LinuxI2cDriver
+-- 	Found component: LinuxI2cDriver in /Users/anniesmith/fprime/Drv/LinuxI2cDriver/LinuxI2cDriverComponentAi.xml
+-- Adding library: Drv_SocketIpDriver
+-- 	Found component: SocketIpDriver in /Users/anniesmith/fprime/Drv/SocketIpDriver/SocketIpDriverComponentAi.xml
+-- Adding library: CFDP_Checksum
+-- Adding library: Utils_Hash
+-- Adding library: Utils_Types
+-- F prime BUILD_ROOT set to project directory: /Users/anniesmith/fprime/Ref/..
+-- Adding library: Ref_PingReceiver
+-- 	Found component: PingReceiver in /Users/anniesmith/fprime/Ref/PingReceiver/PingReceiverComponentAi.xml
+-- Adding library: Ref_RecvBuffApp
+-- 	Found component: RecvBuff in /Users/anniesmith/fprime/Ref/RecvBuffApp/RecvBuffComponentAi.xml
+-- 	Found serializable: PacketStat in /Users/anniesmith/fprime/Ref/RecvBuffApp/PacketStatSerializableAi.xml
+-- Adding library: Ref_SendBuffApp
+-- 	Found component: SendBuff in /Users/anniesmith/fprime/Ref/SendBuffApp/SendBuffComponentAi.xml
+-- Adding library: Ref_SignalGen
+-- 	Found component: SignalGen in /Users/anniesmith/fprime/Ref/SignalGen/SignalGenComponentAi.xml
+-- Adding library: Ref_MathPorts
+-- 	Found port: MathOp in /Users/anniesmith/fprime/Ref/MathPorts/MathOpPortAi.xml
+-- 	Found port: MathResult in /Users/anniesmith/fprime/Ref/MathPorts/MathResultPortAi.xml
+-- Adding library: Ref_MathTypes
+-- 	Found serializable: MathOp in /Users/anniesmith/fprime/Ref/MathTypes/MathOpSerializableAi.xml
+-- Adding library: Ref_MathSender
+-- 	Found component: MathSender in /Users/anniesmith/fprime/Ref/MathSender/MathSenderComponentAi.xml
+-- Adding library: Ref_MathReceiver
+-- 	Found component: MathReceiver in /Users/anniesmith/fprime/Ref/MathReceiver/MathReceiverComponentAi.xml
+-- Adding executable: Ref
+-- 	Found topologyapp: Ref in /Users/anniesmith/fprime/Ref/Top/RefTopologyAppAi.xml
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/anniesmith/fprime/Ref/cmake-build-debug

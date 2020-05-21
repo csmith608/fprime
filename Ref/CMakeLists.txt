@@ -33,6 +33,7 @@ set(FPRIME_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." CACHE PATH "Root path of 
 include("${CMAKE_CURRENT_LIST_DIR}/../cmake/FPrime.cmake")
 # NOTE: register custom targets between these two lines
 include("${CMAKE_CURRENT_LIST_DIR}/../cmake/FPrime-Code.cmake")
+
 # Note: when building a deployment outside of the F prime core directories, then the
 # build root must be re-mapped for use with the standard build system components.
 #
@@ -55,6 +56,10 @@ add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/PingReceiver/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/RecvBuffApp/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/SendBuffApp/")
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/SignalGen/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathPorts/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathTypes/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathSender/")
+add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/MathReceiver/")
 
 # Add Topology subdirectory
 add_fprime_subdirectory("${CMAKE_CURRENT_LIST_DIR}/Top/")

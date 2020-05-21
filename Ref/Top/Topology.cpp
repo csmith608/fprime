@@ -98,6 +98,18 @@ Svc::AssertFatalAdapterComponentImpl fatalAdapter("fatalAdapter");
 
 Svc::FatalHandlerComponentImpl fatalHandler("fatalHandler");
 
+Ref::MathSenderComponentImpl mathSender
+#if FW_OBJECT_NAMES == 1
+("mathSender")
+#endif
+;
+
+Ref::MathReceiverComponentImpl mathReceiver
+#if FW_OBJECT_NAMES == 1
+("mathReceiver")
+#endif
+;
+
 bool constructApp(bool dump, U32 port_number, char* hostname) {
 
 #if FW_PORT_TRACING
@@ -154,6 +166,9 @@ bool constructApp(bool dump, U32 port_number, char* hostname) {
 	fatalHandler.init(0);
 	health.init(25,0);
 	pingRcvr.init(10);
+
+	mathSender.init(10,0);
+	mathReceiver.init(10,0);
     // Connect rate groups to rate group driver
     constructRefArchitecture();
 
@@ -164,6 +179,8 @@ bool constructApp(bool dump, U32 port_number, char* hostname) {
 #endif
         return true;
     }
+    // call generated function to connect components
+    constructRefArchitecture();
 
     /* Register commands */
     sendBuffComp.regCommands();
@@ -181,10 +198,14 @@ bool constructApp(bool dump, U32 port_number, char* hostname) {
 	health.regCommands();
 	pingRcvr.regCommands();
 
+	mathSender.regCommands();
+	mathReceiver.regCommands();
+
     // read parameters
     prmDb.readParamFile();
     recvBuffComp.loadParameters();
     sendBuffComp.loadParameters();
+    mathReceiver.loadParameters();
 
     // set health ping entries
 
@@ -226,6 +247,8 @@ bool constructApp(bool dump, U32 port_number, char* hostname) {
     fileUplink.start(0, 100, 10*1024);
 
     pingRcvr.start(0, 100, 10*1024);
+    //thread ID, thread priority, thread stack size
+    mathSender.start(0,100,10*1024);
 
     // Initialize socket server if and only if there is a valid specification
     if (hostname != NULL && port_number != 0) {
@@ -246,6 +269,7 @@ void exitTasks(void) {
     fileUplink.exit();
     fileDownlink.exit();
     cmdSeq.exit();
+    mathSender.exit();
     pingRcvr.exit();
     socketIpDriver.exitSocketTask();
 }

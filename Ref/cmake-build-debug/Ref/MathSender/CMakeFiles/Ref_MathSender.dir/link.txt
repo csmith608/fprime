@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc ../../lib/Darwin/libRef_MathSender.a  CMakeFiles/Ref_MathSender.dir/MathSenderComponentImpl.cpp.o CMakeFiles/Ref_MathSender.dir/MathSenderComponentAc.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib ../../lib/Darwin/libRef_MathSender.a
