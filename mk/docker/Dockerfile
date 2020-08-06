@@ -19,7 +19,7 @@ RUN groupadd fprime && \
     usermod -u 1001 fprime && \
 # Installing system components
     apt-get update && apt-get install -y --no-install-recommends \
-    bash git build-essential cmake time python3 python3-setuptools python3-pip python3-venv valgrind && \
+    bash git build-essential cmake time python3 python3-setuptools python3-pip python3-venv && \
     mkdir -p /opt/ && \
     git clone --quiet https://github.com/raspberrypi/tools.git /opt/rpi/tools && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -32,7 +32,6 @@ ENV LC_ALL C.UTF-8
 ENTRYPOINT ["/bin/bash"]
 
 ### **** **** Add Non-CI Images Here **** **** ###
-## Example docker container with F prime code copied in:
 FROM fprime-base AS fprime-docker
 RUN     git clone --quiet https://github.com/nasa/fprime.git /opt/fprime && \
         python3 -m venv /opt/fprime-venv/ && . /opt/fprime-venv/bin/activate && \
@@ -50,10 +49,6 @@ ENV PATH "/opt/fprime-venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 #
 # This sets up an image for use within a CI build system. This is currently configured for the
 # Jenkins CI system. This means a Jenkins user is created, setup and ready to run.
-#
-# This is the last image in the file because the Jenkins server used by F prime does not expose
-# the --target argument for building the docker image.  As such, this image is the one built and
-# used for Jenkins.
 ####
 FROM fprime-docker AS jenkins-ci
 RUN groupadd jenkins && \
@@ -64,7 +59,7 @@ RUN groupadd jenkins && \
 ENV HOST jenkins
 ENV USER jenkins
 # Paths and entrypoinys
-ENV PATH "/opt/fprime-venv/bin:/opt/fprime-venv/bin/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH "/opt/fprime-venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV CI_CLEAN_REPO "NO_REALLY_I_WANT_TO_NUKE_ALL_YOUR_BASE"
