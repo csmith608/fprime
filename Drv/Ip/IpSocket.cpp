@@ -15,6 +15,7 @@
 #include <FpConfig.hpp>
 #include <Fw/Types/StringUtils.hpp>
 #include <sys/time.h>
+#include <Fw/Logger/Logger.hpp>
 
 // This implementation has primarily implemented to isolate
 // the socket interface from the F' Fw::Buffer class.
@@ -131,6 +132,14 @@ void IpSocket::close() {
     this->m_lock.unLock();
 }
 
+void IpSocket::lockSocketMutex(){
+    this->m_socket_lock.lock();
+}
+
+void IpSocket::unLockSocketMutex(){
+    this->m_socket_lock.unlock();
+}
+
 void IpSocket::shutdown() {
     this->close();
     this->m_lock.lock();
@@ -172,9 +181,27 @@ SocketIpStatus IpSocket::send(const U8* const data, const U32 size) {
     NATIVE_INT_TYPE fd = this->m_fd;
     this->m_lock.unlock();
     // Prevent transmission before connection, or after a disconnect
-    if (fd == -1) {
+    if (fd == -1) {    
         return SOCK_DISCONNECTED;
     }
+    SocketIpStatus status;
+    bool disconnected = false;
+
+    // Open a network connection if it has not already been open
+    // Lock mutex to avoid competing opens from other threads
+    this->lockSocketMutex();
+    if((not this->isOpened())) {
+        disconnected = (status = this->open()) != SOCK_SUCCESS;
+    }
+    this->unLockSocketMutex();
+
+    if (disconnected) {
+        Fw::Logger::logMsg("[WARNING] Failed to open port on send side with status %d and errno %d\n", status, errno);
+        this->close();
+        // Network level will decide what to do next
+        return SOCK_DISCONNECTED;
+    }
+
     // Attempt to send out data and retry as necessary
     for (U32 i = 0; (i < SOCKET_MAX_ITERATIONS) && (total < size); i++) {
         // Send using my specific protocol

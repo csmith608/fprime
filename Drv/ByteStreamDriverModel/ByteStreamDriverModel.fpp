@@ -34,6 +34,8 @@ module Drv {
         ref pollBuffer: Fw.Buffer
     ) -> PollStatus
 
+    port ByteStreamClose()
+
     @ Signal indicating the driver is ready to send and received data
     port ByteStreamReady()
 }

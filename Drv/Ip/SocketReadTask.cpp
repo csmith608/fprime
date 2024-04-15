@@ -71,7 +71,22 @@ void SocketReadTask::readTask(void* pointer) {
     FW_ASSERT(pointer);
     SocketIpStatus status = SOCK_SUCCESS;
     SocketReadTask* self = reinterpret_cast<SocketReadTask*>(pointer);
+    bool disconnected;
     do {
+        // Open a network connection if it has not already been open
+        disconnected = false;
+        // Lock mutex to avoid competing opens from other threads
+        self->getSocketHandler().lockSocketMutex();
+        if((not self->getSocketHandler().isOpened()) and (not self->m_stop)) {
+            disconnected = (status = self->open()) != SOCK_SUCCESS;
+        }
+        self->getSocketHandler().unLockSocketMutex();
+        if (disconnected) {
+            // comment out so message is not spammed when no IP endpoint exists
+            // Fw::Logger::logMsg("[WARNING] Failed to open port on read side with status %d and errno %d\n", status, errno);
+            Os::Task::delay(SOCKET_RETRY_INTERVAL_MS);
+        }
+
         // Open a network connection if it has not already been open
         if ((not self->getSocketHandler().isStarted()) and (not self->m_stop) and
             ((status = self->startup()) != SOCK_SUCCESS)) {

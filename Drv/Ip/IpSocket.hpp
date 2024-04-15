@@ -156,6 +156,23 @@ class IpSocket {
     void close();
 
     /**
+     * \brief locks the mutex protecting the opening of the IP socket
+     *
+     * Locks the mutex meant to keep the opening of an IP socket an atomic operation. Should be followed by a call to 
+     * unLockSocketMutex when the operation is complete
+     */
+    void lockSocketMutex();
+
+    /**
+     * \brief unlocks the mutex protecting the opening of the IP socket
+     *
+     * Unlocks the mutex locked by lockSocketMutex and should be called when the atomic operation of opening the IP socket
+     * is complete
+     */
+    void unLockSocketMutex();
+
+
+    /**
      * \brief shutdown the socket
      *
      * Closes the socket opened by the open call. In this case of the TcpServer, this does close server's listening
@@ -213,6 +230,7 @@ class IpSocket {
     virtual I32 recvProtocol( U8* const data, const U32 size) = 0;
 
     Os::Mutex m_lock;
+    Os::Mutex m_socket_lock;
     NATIVE_INT_TYPE m_fd;
     U32 m_timeoutSeconds;
     U32 m_timeoutMicroseconds;
