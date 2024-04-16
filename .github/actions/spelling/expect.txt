@@ -971,6 +971,7 @@ sourceforge
 Sourcetrail
 sourcing
 spacetech
+spammed
 sparc
 SPHINXBUILD
 SPHINXOPTS
