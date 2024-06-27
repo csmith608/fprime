@@ -68,6 +68,10 @@ namespace Drv {
       //!
       void test_advanced_reconnect();
 
+      //! Test reconnect on send
+      //!
+      void test_close_open_socket();
+
       // Helpers
       void test_with_loop(U32 iterations, bool recv_thread=false);
 

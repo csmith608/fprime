@@ -128,6 +128,53 @@ void TcpClientTester ::test_advanced_reconnect() {
     test_with_loop(10, true); // Up to 10 * RECONNECT_MS
 }
 
+void TcpClientTester ::test_close_open_socket() {
+    Drv::SocketIpStatus status1 = Drv::SOCK_SUCCESS;
+    Drv::SocketIpStatus status2 = Drv::SOCK_SUCCESS;
+    Drv::SocketIpStatus serverStat = Drv::SOCK_SUCCESS;
+    U16 port =  0;
+    Drv::TcpServerSocket server;
+
+    server.configure("127.0.0.1", port, 0, 100);
+    serverStat = server.startup();
+    this->component.configure("127.0.0.1", server.getListenPort(), 0, 100);
+
+    ASSERT_EQ(serverStat, SOCK_SUCCESS)
+        << "TCP server startup error: " << strerror(errno) << std::endl
+        << "Port: " << port << std::endl;
+
+    status1 = this->component.open();
+    EXPECT_TRUE(this->component.getSocketHandler().isOpened());
+
+    status2 = server.open();
+
+    EXPECT_EQ(status1, Drv::SOCK_SUCCESS);
+    EXPECT_EQ(status2, Drv::SOCK_SUCCESS);
+
+    // Force the sockets not to hang, if at all possible
+    Drv::Test::force_recv_timeout(this->component.getSocketHandler());
+    Drv::Test::force_recv_timeout(server);
+    m_data_buffer.setSize(sizeof(m_data_storage));
+    Drv::Test::fill_random_buffer(m_data_buffer);
+    Drv::SendStatus status = invoke_to_send(0, m_data_buffer);
+    EXPECT_EQ(status, SendStatus::SEND_OK);
+
+    component.close();
+    EXPECT_FALSE(this->component.getSocketHandler().isOpened());
+
+    // Auto re-open through a send
+    m_data_buffer.setSize(sizeof(m_data_storage));
+    Drv::Test::fill_random_buffer(m_data_buffer);
+    status = invoke_to_send(0, m_data_buffer);
+    EXPECT_EQ(status, SendStatus::SEND_OK);
+    EXPECT_TRUE(this->component.getSocketHandler().isOpened());
+
+    // cleanup
+    this->component.close();
+    server.close();
+    server.shutdown();
+}
+
 // ----------------------------------------------------------------------
 // Handlers for typed from ports
 // ----------------------------------------------------------------------

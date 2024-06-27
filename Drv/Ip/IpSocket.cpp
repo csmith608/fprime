@@ -177,13 +177,6 @@ SocketIpStatus IpSocket::open() {
 SocketIpStatus IpSocket::send(const U8* const data, const U32 size) {
     U32 total = 0;
     I32 sent  = 0;
-    this->m_lock.lock();
-    NATIVE_INT_TYPE fd = this->m_fd;
-    this->m_lock.unlock();
-    // Prevent transmission before connection, or after a disconnect
-    if (fd == -1) {    
-        return SOCK_DISCONNECTED;
-    }
     SocketIpStatus status;
     bool disconnected = false;
 

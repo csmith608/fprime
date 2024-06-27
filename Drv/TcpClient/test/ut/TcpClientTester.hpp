@@ -61,6 +61,8 @@ namespace Drv {
 
       void test_with_loop(U32 iterations, bool recv_thread=false);
 
+      void test_close_open_socket();
+
     private:
 
       // ----------------------------------------------------------------------

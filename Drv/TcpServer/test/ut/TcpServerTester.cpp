@@ -131,6 +131,71 @@ void TcpServerTester ::test_advanced_reconnect() {
     test_with_loop(10, true); // Up to 10 * RECONNECT_MS
 }
 
+void TcpServerTester ::test_close_open_socket() {
+    U8 buffer[sizeof(m_data_storage)] = {};
+
+    Drv::SocketIpStatus status1 = Drv::SOCK_SUCCESS;
+    Drv::SocketIpStatus status2 = Drv::SOCK_SUCCESS;
+    Drv::SocketIpStatus serverStat = Drv::SOCK_SUCCESS;
+
+    U16 port =  0;
+
+    this->component.configure("127.0.0.1", port, 0, 100);
+    serverStat = this->component.startup();
+    ASSERT_EQ(serverStat, SOCK_SUCCESS)
+            << "TCP server startup error: " << strerror(errno) << std::endl
+            << "Port: " << port << std::endl;
+    EXPECT_TRUE(component.getSocketHandler().isStarted());
+
+    Drv::TcpClientSocket client;
+    client.configure("127.0.0.1", this->component.getListenPort(), 0, 100);
+    status2 = client.open();
+
+    U32 size = sizeof(m_data_storage);
+
+    status1 = this->component.open();
+
+    EXPECT_TRUE(this->component.getSocketHandler().isOpened());
+
+    EXPECT_EQ(status1, Drv::SOCK_SUCCESS);
+    EXPECT_EQ(status2, Drv::SOCK_SUCCESS);
+
+    // Force the sockets not to hang, if at all possible
+    Drv::Test::force_recv_timeout(this->component.getSocketHandler());
+    Drv::Test::force_recv_timeout(client);
+    m_data_buffer.setSize(sizeof(m_data_storage));
+    Drv::Test::fill_random_buffer(m_data_buffer);
+    Drv::SendStatus status = invoke_to_send(0, m_data_buffer);
+    EXPECT_EQ(status, SendStatus::SEND_OK);
+    status2 = client.recv(buffer, size);
+    EXPECT_EQ(status2, Drv::SOCK_SUCCESS);
+    EXPECT_EQ(size, m_data_buffer.getSize());
+    Drv::Test::validate_random_buffer(m_data_buffer, buffer);
+
+    component.close();
+    EXPECT_FALSE(this->component.getSocketHandler().isOpened());
+
+    client.close();
+
+    status2 = client.open();
+    EXPECT_EQ(status2, Drv::SOCK_SUCCESS);
+
+    // Auto re-open through a send
+    // Force the sockets not to hang, if at all possible
+    Drv::Test::force_recv_timeout(this->component.getSocketHandler());
+    Drv::Test::force_recv_timeout(client);
+    m_data_buffer.setSize(sizeof(m_data_storage));
+    Drv::Test::fill_random_buffer(m_data_buffer);
+    status = invoke_to_send(0, m_data_buffer);
+    EXPECT_EQ(status, SendStatus::SEND_OK);
+    EXPECT_TRUE(this->component.getSocketHandler().isOpened());
+
+    // cleanup
+    client.close();
+    this->component.shutdown();
+}
+
+
 // ----------------------------------------------------------------------
 // Handlers for typed from ports
 // ----------------------------------------------------------------------

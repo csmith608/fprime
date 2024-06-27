@@ -24,6 +24,12 @@ TEST(Reconnect, ReceiveThreadReconnect) {
     tester.test_advanced_reconnect();
 }
 
+TEST(CloseSocket, BasicCloseOpenSocket) {
+    Drv::TcpServerTester tester;
+    tester.test_close_open_socket();
+}
+
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
