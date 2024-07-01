@@ -189,7 +189,10 @@ SocketIpStatus IpSocket::send(const U8* const data, const U32 size) {
     this->unLockSocketMutex();
 
     if (disconnected) {
-        Fw::Logger::logMsg("[WARNING] Failed to open port on send side with status %d and errno %d\n", status, errno);
+        Fw::Logger::logMsg(
+            "[WARNING] Failed to open port on send side with status %d and errno %d\n", 
+            static_cast<POINTER_CAST>(status), 
+            static_cast<POINTER_CAST>(errno));
         this->close();
         // Network level will decide what to do next
         return SOCK_DISCONNECTED;
